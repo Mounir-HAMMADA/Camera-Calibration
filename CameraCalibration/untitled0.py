@@ -43,8 +43,13 @@ for fname in images:
 
         # Draw and display the corners
         img = cv.drawChessboardCorners(img, (m,n), corners2,ret)
-        cv.imshow('img',img)
-        cv.imshow('img',img3)
+        
+        #image avec la detection
+        cv.imshow('image avec la detection',img)
+        
+        #image original
+        cv.imshow('image original',img2)
+        
         cv.waitKey(1000)
         ret, mtx, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, imggris.shape[::-1],None,None)
         h,  w = img.shape[:2]
@@ -56,7 +61,9 @@ for fname in images:
         x,y,w,h = roi
         dst = dst[y:y+h, x:x+w]
         cv.imwrite('calibresult.png',dst)
-        cv.imshow('img2',dst)
+        
+        #image non deformer
+        cv.imshow('image non deformer',dst)
 
 cv.waitKey()
 
